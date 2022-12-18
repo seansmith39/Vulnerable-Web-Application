@@ -30,7 +30,7 @@
             if (isset($secure2)) 
             {        
               @include($secure2);
-              echo"<div align='center'><b><h5>".$secure2."</h5></b></div> ";   
+              echo"<div align='center'><b><h5>".htmlspecialchars($secure2)."</h5></b></div> ";
             }
         }              
       ?>

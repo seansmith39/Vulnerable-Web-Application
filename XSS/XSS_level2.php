@@ -18,7 +18,7 @@
 	</div>
 <?php
 if (isset($_GET["username"])) {
- 	$user = str_replace("<script>", "",$_GET["username"]);
+ 	$user = str_replace("<script>", "",htmlspecialchars($_GET["username"]));
 	echo "Your name is "."$user";
 }
 ?>
