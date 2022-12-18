@@ -20,7 +20,7 @@
 <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "root";
+	$password = "";
 	$db = "1ccb8097d0e9ce9f154608be60224c7c";
 	// Create connection
 	$conn = new mysqli($servername, $username, $password,$db);
