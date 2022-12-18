@@ -27,7 +27,7 @@
 <?php
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$db = "1ccb8097d0e9ce9f154608be60224c7c";
 
 	// Create connection
@@ -49,23 +49,20 @@
 			exit;
 		}
 
-		$query = "SELECT bookname,authorname FROM books WHERE number = $number"; 
-		$result = mysqli_query($conn,$query);
+        $result = $conn->execute_query('SELECT bookname,authorname FROM books WHERE number = ?', [$number]);
 
-		if (!$result) { //Check result
-		    $message  = 'Invalid query: ' . mysql_error() . "\n";
-		    $message .= 'Whole query: ' . $query;
-		    die($message);
-		}
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<hr>";
+                echo htmlspecialchars($row['bookname']) . " ----> " . htmlspecialchars($row['authorname']);
+            }
 
-		while ($row = mysqli_fetch_assoc($result)) {
-			echo "<hr>";
-		    echo $row['bookname']." ----> ".$row['authorname'];    
-		}
-
-		if(mysqli_num_rows($result) <= 0)
-			echo "0 result";
-
+            if (mysqli_num_rows($result) <= 0)
+                echo "0 result";
+        } else {
+            $message  = 'Invalid query: ' . mysql_error() . "\n";
+            die($message);
+        }
 	}
 ?> 
 
